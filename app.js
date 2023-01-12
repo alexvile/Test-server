@@ -2,6 +2,8 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require('cors');
 
+const userRoutes = require('./routes/userRoutes');
+
 const app = express();
 
 app.use(logger('short'));
@@ -9,13 +11,14 @@ app.use(cors());
 app.use(express.json());
 
 
-app.get('/api/test', function(req, res) {
-    console.log('startd');
-    res.send('Welcome sdfsdfsf')
-});
+// app.get('/api/test', function(req, res) {
+//     console.log('startd');
+//     res.send('Welcome sdfsdfsf')
+// });
 
+app.use('/api/users', userRoutes);
 
-// temporary solution to empty pages
+// todo - temporary solution to empty pages
 
 app.use((req, res) => {
     res.status(404).json({ message: 'Not found' })
