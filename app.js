@@ -3,6 +3,7 @@ const logger = require("morgan");
 const cors = require('cors');
 
 const userRoutes = require('./routes/userRoutes');
+const {errorHandler} = require('./helpers/apiHelpers')
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(express.json());
 // });
 
 app.use('/api/users', userRoutes);
+
+app.use(errorHandler);
 
 // todo - temporary solution to empty pages
 
