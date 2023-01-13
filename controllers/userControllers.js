@@ -30,6 +30,11 @@ const loginController = async (req, res) => {
     return res.status(200).json({ email, token });
 }
 
+const getCurrentController = async (req, res) => {
+    const { email } = req.user
+    return res.status(200).json({email})
+}
+
 const logoutController = async (req, res) => {
     const {_id} = req.user;
     await User.findByIdAndUpdate(_id, {token: null});
@@ -37,5 +42,5 @@ const logoutController = async (req, res) => {
 }
 
 module.exports = {
-    registerController, loginController, logoutController
+    registerController, loginController, logoutController, getCurrentController
 }
