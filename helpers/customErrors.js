@@ -12,6 +12,13 @@ class RegistrationConflictError extends CustomError {
     }
 }
 
+class NotAuthorizedError extends CustomError {
+    constructor(message) { 
+        super(message);
+        this.status = 401;
+        }
+}
+
 module.exports = {
-    CustomError, RegistrationConflictError
+    CustomError, RegistrationConflictError, NotAuthorizedError
 }

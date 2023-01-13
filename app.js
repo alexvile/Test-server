@@ -12,10 +12,6 @@ app.use(cors());
 app.use(express.json());
 
 
-// app.get('/api/test', function(req, res) {
-//     console.log('startd');
-//     res.send('Welcome sdfsdfsf')
-// });
 
 app.use('/api/users', userRoutes);
 
