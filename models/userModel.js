@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema({
         required: [true , "Password is required"],
         unique: true
     },
+    token: {
+        type: String,
+        default: null
+    }
 },
 { versionKey: false, timestamps: true }
 )
@@ -20,7 +24,6 @@ userSchema.pre('save', async function EncryptPasswordBeforeSaving() {
         this.password = await bcrypt.hash(this.password, 10);
     }
 });
-
 
 
 const User = mongoose.model('User', userSchema);

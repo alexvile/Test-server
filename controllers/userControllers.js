@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { User } = require('../models/userModel');
 const { RegistrationConflictError, NotAuthorizedError } = require('../helpers/customErrors');
 
@@ -23,7 +24,10 @@ const loginController = async (req, res) => {
     if(!await bcrypt.compare(password, user.password)) {
         throw new NotAuthorizedError('Wrong password');
     }
-    return res.status(200).json({ email });
+    
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    await User.findByIdAndUpdate(user._id, {token});
+    return res.status(200).json({ email, token });
 }
 
 module.exports = {
